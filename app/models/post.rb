@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
   private
 
   def clickbaity_title
-    if file_name.present? && !%w{.jpg .png .jpeg .tif}.include?(File.extname(file_name.downcase))
+    if self.title && !%w{.jpg .png .jpeg .tif}.include?(File.extname(file_name.downcase))
       errors.add(:file_name, :invalid_extension)
     end
   end
