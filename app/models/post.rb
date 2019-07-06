@@ -10,8 +10,8 @@ class Post < ActiveRecord::Base
   private
 
   def clickbaity_title
-    if title.present? && expiration_date < Date.today
-      errors.add(:not_clickbaity, "title not clickbait-y")
+    if title.present? && %w{"Won't Believe" "Guess" "Secret" "Top"} 
+      add(:not_clickbaity, "title not clickbait-y")
     end
   end
   
