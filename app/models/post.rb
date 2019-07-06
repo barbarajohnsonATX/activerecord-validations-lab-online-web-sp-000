@@ -7,7 +7,7 @@ class Post < ActiveRecord::Base
   
   validate :clickbaity_title
 
-  private
+  
 
   def clickbaity_title
     if title.present? && %w{"Won't Believe" "Guess" "Secret" "Top"} 
