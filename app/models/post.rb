@@ -3,17 +3,14 @@ class Post < ActiveRecord::Base
   validates :content, length: { minimum: 250 }
   validates :summary, length: { maximum: 250 }
   validates :category, inclusion: { in: %w(Fiction Non-Fiction ) }
-  validates :title, exclusion: { in: %w("Guess" "Won't Believe") }
-  
-  validate :clickbaity_title
-
-  
-
-  def clickbaity_title
-    if title.present? && %w{"Won't Believe" "Guess" "Secret" "Top"} 
-      add(:not_clickbaity, "title not clickbait-y")
-    end
-  end
-  
 
 end
+
+class ClickbaitValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    unless value =~ /(Won't Believe|Secret|Top \d|Guess)/
+      record.errors[attribute] << ("Not a clickbait title")
+    end
+  end
+end
+
