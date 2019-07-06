@@ -10,8 +10,8 @@ class Post < ActiveRecord::Base
   private
 
   def clickbaity_title
-    if self.title && !%w{.jpg .png .jpeg .tif}.include?(File.extname(file_name.downcase))
-      errors.add(:file_name, :invalid_extension)
+    if title.present? && expiration_date < Date.today
+      errors.add(:not_clickbaity, "title not clickbait-y")
     end
   end
   
