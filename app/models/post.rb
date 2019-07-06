@@ -9,7 +9,7 @@ class ClickbaityTitleValidator < ActiveModel::EachValidator
 end
 
 class Post < ActiveRecord::Base
-  validates :title, presence: true, clickbaitytitle
+  validates :title, presence: true, clickbaitytitle :true
   validates :content, length: { minimum: 250 }
   validates :summary, length: { maximum: 250 }
   validates :category, inclusion: { in: %w(Fiction Non-Fiction ) }
